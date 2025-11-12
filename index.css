@@ -1,4 +1,104 @@
-html, body {
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0A1931;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.card-container {
+    width: 100%;
+    max-width: 28rem;
+    display: flex;
+    justify-content: center;
+}
+
+.app-card {
+    background-color: #1A2B42;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    padding: 0.25rem;
+    border: 4px solid #FDE68A;
+}
+
+.app-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+}
+
+.question-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.question-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+}
+
+.txt-input {
+    background-color: #0A1931;
+    color: #E2E8F0;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid rgba(80, 227, 194, 0.2);
+    width: 100%;
+    outline: none;
+}
+
+.txt-input::placeholder {
+    color: #E2E8F0;
+    opacity: 1;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #50E3C2;
+    color: #0A1931;
+    font-weight: 800;
+    font-size: 1.25rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #4ad1b1;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
 }

@@ -1,10 +1,49 @@
-<!doctype html>
-<html>
-    <head>
-        <title>PopChoice</title>
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <script type="module" src="index.js"></script>
-    </body>
-</html> 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PopChoice </title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+
+    <div class="card-container">
+        <div id="questions-view" class="app-card">
+            <div class="header-section">
+                <img src="popcorn.png" alt="PopChoice Popcorn Logo" class="logo">
+                <h1 class="app-title">PopChoice</h1>
+            </div>
+
+            <div class="question-group">
+                <div class="question-block">
+                    <p class="question-text">What's your favorite movie and why?</p>
+                    <input type="text" id="q1-input" class="txt-input" placeholder="The Shawshank Redemption"
+                        value="The Shawshank Redemption">
+                </div>
+
+                <div class="question-block">
+                    <p class="question-text">Are you in the mood for something new or a classic?</p>
+                    <input type="text" id="q2-input" class="txt-input"
+                        placeholder="I want to watch movies that were released after 1990"
+                        value="I want to watch movies that were released after 1990">
+                </div>
+
+                <div class="question-block">
+                    <p class="question-text">Do you wanna have fun or do you want something serious?</p>
+                    <input type="text" id="q3-input" class="txt-input"
+                        placeholder="I want to watch something stupid and fun"
+                        value="I want to watch something stupid and fun">
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="window.location.href='result.html'">Let's Go</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
