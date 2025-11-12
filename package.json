@@ -1,6 +1,7 @@
 {
-  "name": "Scrim-s05qo7r",
+  "name": "popchoice",
   "description": "https://scrimba.com/the-ai-engineer-path-c02v/~023/s0te2beku2/head",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
