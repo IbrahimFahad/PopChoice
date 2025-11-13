@@ -32,28 +32,43 @@ export default {
 			const openai = new OpenAI({ apiKey: openaiKey });
 			const supabase = createClient(supabaseUrl, supabaseKey);
 
-			const { content } = await request.json();
-			if (!content) throw new Error('Missing content in request');
+			let userQuery;
 
-			console.log('Received content from frontend:', content);
+			try {
+				const jsonBody = await request.json();
+				userQuery = jsonBody.content;
+
+				if (!userQuery || typeof userQuery !== 'string') {
+					return new Response(JSON.stringify({ error: 'Missing or invalid "content" in request body.' }), {
+						status: 400,
+						headers: { 'Content-Type': 'application/json', ...corsHeaders },
+					});
+				}
+			} catch (e) {
+				console.error('JSON Parsing Error:', e.message);
+				return new Response(JSON.stringify({ error: 'Failed to parse JSON request body. Check Content-Type and body format.' }), {
+					status: 400,
+					headers: { 'Content-Type': 'application/json', ...corsHeaders },
+				});
+			}
 
 			const embeddingRes = await openai.embeddings.create({
 				model: 'text-embedding-3-small',
-				input: content,
+				input: userQuery,
 			});
 			const embedding = embeddingRes.data[0].embedding;
+
+			console.log('Generated embedding length:', embedding.length);
 
 			const { data, error } = await supabase.rpc('match_movies', {
 				query_embedding: embedding,
 				match_threshold: 0.5,
-				match_count: 3,
+				match_count: 1,
 			});
 
 			if (error) throw error;
 
-			const context = data.map((d) => d.content).join('\n');
-
-			console.log('Context retrieved from Supabase:', context);
+			const contextText = data.map((d) => d.content).join('\n');
 
 			const chatRes = await openai.chat.completions.create({
 				model: 'gpt-4o-mini',
@@ -62,14 +77,21 @@ export default {
 						role: 'system',
 						content: `You are an enthusiastic movie expert who loves recommending movies to people. You will be given two pieces of information - some context about movies and a question. Your main job is to formulate a short answer to the question using the provided context. If you are unsure and cannot find the answer in the context, say, "Sorry, I don't know the answer." Please do not make up the answer.`,
 					},
-					{ role: 'user', content: `Context: ${context} Question: ${content}` },
+					{ role: 'user', content: `Context: ${contextText} Question: ${content}` },
 				],
 				temperature: 0.65,
 			});
 
 			const answer = chatRes.choices[0].message.content;
 
-			return new Response(JSON.stringify({ answer }), { headers: corsHeaders });
+			return new Response(
+				JSON.stringify({
+					answer,
+					userQuery,
+					contextText,
+				}),
+				{ headers: corsHeaders }
+			);
 		} catch (err) {
 			console.error('Worker error:', err);
 			return new Response(JSON.stringify({ error: err.message }), {
