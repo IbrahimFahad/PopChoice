@@ -1,22 +1,34 @@
 import { movies } from "./content.js";
+
 window.addEventListener("DOMContentLoaded", () => {
   const button = document.querySelector(".btn");
-  button.addEventListener("click", main());
+  if (!button) return console.error("Button not found");
+  button.addEventListener("click", main);
 });
+
 async function main() {
   const outputElement = document.getElementById("api-output");
+  if (!outputElement) {
+    console.error("Output element not found");
+    return;
+  }
 
   try {
     const q1 = document.getElementById("q1-input");
     const q2 = document.getElementById("q2-input");
     const q3 = document.getElementById("q3-input");
 
-    const query = q1.value + " " + q2.value + " " + q3.value;
+    if (!q1 || !q2 || !q3) {
+      console.error("One or more input fields are missing");
+      outputElement.innerText = "Please fill in all fields.";
+      return;
+    }
+
+    const query = `${q1.value} ${q2.value} ${q3.value}`;
 
     await fetching(query, outputElement);
-    window.location.href = "result.html";
   } catch (error) {
-    console.error("Error in main function.", error.message);
+    console.error("Error in main function.", error);
     outputElement.innerText = "Sorry, something went wrong. Please try again.";
   }
 }
@@ -30,15 +42,15 @@ async function fetching(query, outputElement) {
       body: JSON.stringify({ content: query }),
     });
 
-    const result = await response.json();
-
     if (!response.ok) {
-      throw new Error(`Worker Error: ${result.error}`);
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Unknown API error");
     }
 
+    const result = await response.json();
     outputElement.innerText = result;
   } catch (e) {
-    console.error("Error:", e.message);
+    console.error("Error:", e);
     outputElement.innerText = "Error contacting API.";
   }
 }
