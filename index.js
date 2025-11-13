@@ -1,17 +1,20 @@
 import { movies } from "./content.js";
-const button = document.querySelector(".submit-btn");
+const button = document.querySelector(".btn");
 button.addEventListener("click", () => {
   main();
 });
 
 async function main() {
+  const outputElement = document.getElementById("api-output");
+
   try {
     const q1 = document.getElementById("q1-input");
     const q2 = document.getElementById("q2-input");
     const q3 = document.getElementById("q3-input");
-    const outputElement = document.getElementById("api-output");
+
     const query = q1.value + " " + q2.value + " " + q3.value;
-    await fetching(query);
+
+    await fetching(query, outputElement);
     window.location.href = "result.html";
   } catch (error) {
     console.error("Error in main function.", error.message);
@@ -19,26 +22,24 @@ async function main() {
   }
 }
 
-async function fetching(query) {
+async function fetching(query, outputElement) {
   try {
-    const url = "https://openai-worker.openai-ibro.workers.dev/";
+    const url = "https://popchoice.openai-ibro.workers.dev/";
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-
-      body: JSON.stringify({
-        content: { content: query },
-      }),
+      body: JSON.stringify({ content: query }),
     });
 
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Worker Error: ${data.error}`);
+      throw new Error(`Worker Error: ${result.error}`);
     }
 
-    outputElement.innerText = result.answer;
+    outputElement.innerText = result;
   } catch (e) {
     console.error("Error:", e.message);
+    outputElement.innerText = "Error contacting API.";
   }
 }

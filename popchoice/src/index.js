@@ -20,7 +20,6 @@ export default {
 		const openai = new OpenAI({
 			apiKey: env.OPENAI_API_KEY,
 			baseURL: 'https://gateway.ai.cloudflare.com/v1/1433d8205e17a783fa1805576eb2de76/popchoice/openai',
-			dangerouslyAllowBrowser: true,
 		});
 
 		/** Supabase config */
