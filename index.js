@@ -1,6 +1,6 @@
 import { movies } from "./content.js";
 
-document.querySelector(".btn").addEventListener("click", function () {
+document.querySelector(".submit-btn").addEventListener("click", function () {
   main();
 });
 
