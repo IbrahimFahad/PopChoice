@@ -1,5 +1,3 @@
-import { movies } from "./content.js";
-
 window.addEventListener("DOMContentLoaded", () => {
   const button = document.querySelector(".submit-btn");
   if (!button) return console.error("Submit button not found");
@@ -40,13 +38,12 @@ async function fetching(query) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.error || "Unknown API error");
     }
 
     const data = await response.json();
-
-    return typeof data === "string" ? data : JSON.stringify(data);
+    return data.answer || JSON.stringify(data);
   } catch (e) {
     console.error("Fetching error:", e);
     return "Error contacting API.";
