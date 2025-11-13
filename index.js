@@ -5,9 +5,6 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!button) return console.error("Submit button not found");
 
   button.addEventListener("click", async () => {
-    const outputElement = document.getElementById("api-output");
-    if (!outputElement) return console.error("Output element not found");
-
     try {
       const q1 = document.getElementById("q1-input");
       const q2 = document.getElementById("q2-input");
@@ -24,8 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
       localStorage.setItem("originalText", query);
       localStorage.setItem("text", resultText);
-
-      outputElement.innerText = resultText;
 
       window.location.href = "Results_view.html";
     } catch (err) {

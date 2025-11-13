@@ -6,7 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PopChoice Result</title>
     <link rel="stylesheet" href="index.css">
-    <script type="module" src="index.js"></script>
+    <script type="module">
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const outputElement = document.getElementById("api-output");
+            const result = localStorage.getItem("text");
+
+            if (outputElement) {
+                outputElement.innerText = result || "No result found";
+            }
+        });
+
+
+
+    </script>
 </head>
 
 <body>
