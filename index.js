@@ -25,6 +25,8 @@ window.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("originalText", query);
       localStorage.setItem("text", resultText);
 
+      outputElement.innerText = resultText;
+
       window.location.href = "Results_view.html";
     } catch (err) {
       console.error("Error:", err);
