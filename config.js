@@ -6,6 +6,8 @@ if (!process.env.OPENAI_API_KEY)
   throw new Error("OpenAI API key is missing or invalid.");
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  baseURL:
+    "https://gateway.ai.cloudflare.com/v1/1433d8205e17a783fa1805576eb2de76/popchoice/openai",
   dangerouslyAllowBrowser: true,
 });
 
