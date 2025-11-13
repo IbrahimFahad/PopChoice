@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const q3 = document.getElementById("q3-input");
 
       if (!q1 || !q2 || !q3) {
-        outputElement.innerText = "Please fill in all input fields.";
+        alert("Please fill in all input fields.");
         return;
       }
 
