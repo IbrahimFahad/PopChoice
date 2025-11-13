@@ -35,6 +35,8 @@ export default {
 			const { content } = await request.json();
 			if (!content) throw new Error('Missing content in request');
 
+			console.log('Received content from frontend:', content);
+
 			const embeddingRes = await openai.embeddings.create({
 				model: 'text-embedding-3-small',
 				input: content,
@@ -51,13 +53,14 @@ export default {
 
 			const context = data.map((d) => d.content).join('\n');
 
+			console.log('Context retrieved from Supabase:', context);
+
 			const chatRes = await openai.chat.completions.create({
 				model: 'gpt-4o-mini',
 				messages: [
 					{
 						role: 'system',
-						content:
-							'You are a movie expert. Given some context and a user question, give a short answer using the context. If unsure, say "Sorry, I don’t know the answer." Do not make up answers.',
+						content: `You are an enthusiastic movie expert who loves recommending movies to people. You will be given two pieces of information - some context about movies and a question. Your main job is to formulate a short answer to the question using the provided context. If you are unsure and cannot find the answer in the context, say, "Sorry, I don't know the answer." Please do not make up the answer.`,
 					},
 					{ role: 'user', content: `Context: ${context} Question: ${content}` },
 				],
