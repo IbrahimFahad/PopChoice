@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded", () => {
       window.location.href = "result.html";
     } catch (err) {
       console.error("Error:", err);
-      outputElement.innerText = "An error occurred. Please try again.";
+      alert("An error occurred. Please try again.");
     }
   });
 });
