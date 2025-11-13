@@ -1,9 +1,7 @@
 import { movies } from "./content.js";
 
-window.addEventListener("DOMContentLoaded", () => {
-  const button = document.querySelector(".btn");
-  if (!button) return console.error("Button not found");
-  button.addEventListener("click", main);
+document.querySelector(".btn").addEventListener("click", function () {
+  main();
 });
 
 async function main() {
