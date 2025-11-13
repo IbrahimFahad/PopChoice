@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("originalText", query);
       localStorage.setItem("text", resultText);
 
-      window.location.href = "Results_view.html";
+      window.location.href = "result.html";
     } catch (err) {
       console.error("Error:", err);
       outputElement.innerText = "An error occurred. Please try again.";
