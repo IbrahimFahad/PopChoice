@@ -1,7 +1,7 @@
 import { movies } from "./content.js";
 window.addEventListener("DOMContentLoaded", () => {
   const button = document.querySelector(".btn");
-  button.addEventListener("click", main);
+  button.addEventListener("click", main());
 });
 async function main() {
   const outputElement = document.getElementById("api-output");
