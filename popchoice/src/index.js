@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 import { createClient } from '@supabase/supabase-js';
 const corsHeaders = {
 	'Access-Control-Allow-Origin': '*',
-	'Access-Constrol-Allow-Methods': 'POST, OPTIONS',
+	'Access-Control-Allow-Methods': 'POST',
 	'Access-Control-Allow-Headers': 'Content-Type',
 };
 

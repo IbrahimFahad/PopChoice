@@ -21,8 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
       localStorage.setItem("originalText", query);
       localStorage.setItem("text", resultText);
-
-      window.location.href = "result.html";
     } catch (err) {
       console.error("Error:", err);
       alert("An error occurred. Please try again.");
